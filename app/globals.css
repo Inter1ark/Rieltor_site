@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/*
+ * ───────────────────────────────────────────────────────────────────────────
+ *  ПРАВИЛЬНАЯ ЛОКАЦИЯ — премиальная тёмная тема
+ * ───────────────────────────────────────────────────────────────────────────
+ */
+:root {
+  /* Базовая глубина — почти чёрный с синим подтоном */
+  --bg: #05070a;
+  --bg-elev: #0a0e14;
+  --fg: #f4f6f8;
+  --fg-muted: #97a2b0;
+  --fg-dim: #5d6873;
+
+  /* Акценты — глубокий изумруд + холодный синий */
+  --emerald: #2fe0a6;
+  --emerald-deep: #0f8a66;
+  --azure: #4f8cff;
+  --azure-deep: #1b3a8f;
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-dim: var(--fg-dim);
+  --color-emerald: var(--emerald);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-azure: var(--azure);
+  --color-azure-deep: var(--azure-deep);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Fira Code", monospace;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  /* Lenis управляет скроллом сам — нативный smooth выключаем */
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Тонкая премиальная типографика заголовков */
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-feature-settings: "liga", "kern";
+}
+
+/* Утилита: текст с лёгким градиентным свечением акцента */
+.text-glow-emerald {
+  text-shadow: 0 0 40px rgba(47, 224, 166, 0.25);
+}
+
+/* Тонкий скроллбар */
+::selection {
+  background: rgba(47, 224, 166, 0.25);
+  color: #fff;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Уважение к prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
